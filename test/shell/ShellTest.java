@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import ai.CoordConventionMapper;
 import board.Board;
 import board.MoveChecker;
 
@@ -21,17 +22,17 @@ public class ShellTest {
 	
 	@Before
 	public void setUp() {
-		shell = new Shell(mockedBoard, mockedAI);
+		shell = new Shell(mockedBoard, mockedAI, mockedMapper);
 	}
 	
 	@Test
 	public void acceptsAString() {
-		shell.move("some input");
+		shell.tryMove("some input");
 	}
 	
 	@Test
 	public void ifStringSentIsInvalidThenMessageIllegalMoveIsReturned() {
-		String response = shell.move("invalid Input");
+		String response = shell.tryMove("invalid Input");
 		assertEquals("not a valid move.. try again!", response);
 	}
 	
@@ -39,11 +40,11 @@ public class ShellTest {
 	public void ifStringSentIsAIThenMakesCallToAIWIthCurrentBoardAndMovesCurrentBoard() {
 		ArrayList<Integer[]> move = new ArrayList<Integer[]>();
 		move.add(new Integer[] {2, 3});
-		when(mockedAI.getBestMove(mockedBoard.grid())).thenReturn(move);
+		when(mockedAI.getBestMove(mockedBoard)).thenReturn(move);
 		
-		shell.move("ai");
+		shell.tryMove("ai");
 
-		verify(mockedAI).getBestMove(mockedBoard.grid());
+		verify(mockedAI).getBestMove(mockedBoard);
 		verify(mockedBoard).move(move);
 	}
 	
@@ -52,11 +53,16 @@ public class ShellTest {
 		String attemptedMove = "13 17";
 		when(mockedChecker.isLegal((Character[][])anyObject(), (ArrayList<Integer[]>)anyObject(), anyInt()))
 		.thenReturn(true);
-		when(mockedMapper.getCoordOf(13)).thenReturn(new Integer[] {3, 0});
+//		when(mockedMapper.getCoordOf(13)).thenReturn(new Integer[] {3, 0});
+//		when(mockedMapper.getCoordOf(17)).thenReturn(new Integer[] {4, 2});
 		
-		shell.move(attemptedMove);
+/*		ArrayList<Integer[]> expectedMove = new ArrayList<Integer[]>();
+		expectedMove.add(new Integer[] {3, 0});
+		expectedMove.add(new Integer[] {4, 2});
+	*/	
+		shell.tryMove(attemptedMove);
 		
-		verify(mockedBoard).move(move);
+		verify(mockedBoard).move((ArrayList<Integer[]>)anyObject());
 		
 	}
 	
