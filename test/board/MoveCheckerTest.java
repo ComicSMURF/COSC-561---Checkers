@@ -64,6 +64,7 @@ public class MoveCheckerTest {
 		move.add(new Integer[]{5,0});
 		move.add(new Integer[]{4,1});
 		assertFalse(checker.isLegal(board.grid(), move, 0));
+		assertTrue(checker.isLegal(board.grid(), move, 1));
 		assertFalse(checker.isLegal(board.grid(), move, 2));
 		assertFalse(checker.isLegal(board.grid(), move, 4));
 	}

@@ -166,15 +166,4 @@ public class BoardTest {
 			}
 		}
 	}
-	
-	/*
-	 * 
-	 * isn't board just a data structure... do i want it to be self validating?
-	 * 
-	 *	AI move can be requested,
-	 *	player move can be requested
-	 *	when player move is requested it checks the rules to make sure it is valid, if it is, the move is made
-	 *  but if it is invalid it doesn't do anything
-	 * 
-	 */
 }
