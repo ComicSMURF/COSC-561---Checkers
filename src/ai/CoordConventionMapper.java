@@ -2,17 +2,28 @@ package ai;
 
 import java.util.HashMap;
 
-import ai.AIHandling.Mapping;
+import ai.CoordConventionMapper.Mapping;
 
-public class AIHandling {
+public class CoordConventionMapper {
+
 	private HashMap<Integer,Mapping> map;
 	
-	public AIHandling(){
+	/**
+	 * Default constructor
+	 */
+	public CoordConventionMapper(){
 		map = new HashMap<Integer, Mapping>();
 		setupNumbers(); 
 	}
 	
-	public Integer[] convertCoord(Integer num){		
+	/**
+	 * Converts the integer number into the appropriate
+	 * coordinate number
+	 * 
+	 * @param num - The part of the board to retrieve the coordinate
+	 * @return the coordinate converted
+	 */
+	public Integer[] getCoordOf(Integer num){		
 		return map.get(num).getSet();
 	}
 	
