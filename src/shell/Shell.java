@@ -5,23 +5,31 @@ import java.util.StringTokenizer;
 
 import ai.CoordConventionMapper;
 import board.Board;
+import board.MoveChecker;
 
 public class Shell {
 
 	aiMoveGetter ai;
 	Board board;
 	CoordConventionMapper coordMapper;
+	private MoveChecker moveChecker;
 	
-	public Shell(Board board, aiMoveGetter aiMoveGetter, CoordConventionMapper coordMapper) {
+	public Shell(Board board, aiMoveGetter aiMoveGetter, CoordConventionMapper coordMapper, MoveChecker moveChecker) {
 		this.board = board;
 		ai = aiMoveGetter;
 		this.coordMapper = coordMapper;
+		this.moveChecker = moveChecker;
 	}
 
 	public String tryMove(String playerInput) {
 		try{
 			ArrayList<Integer[]> bestMove = moveFromString(playerInput);
-			board.move(bestMove);
+			
+			if(moveChecker.isLegal(board.grid(), bestMove, board.movesSoFar()))
+				board.move(bestMove);
+			else
+				throw new Exception();
+			
 			return board.gridAsString();
 			
 		}
@@ -33,8 +41,8 @@ public class Shell {
 	private ArrayList<Integer[]> moveFromString(String playerInput) throws Exception {
 		ArrayList<Integer[]> bestMove;
 		
-		if(playerInput == "ai") {
-			bestMove = ai.getBestMove(board);
+		if(playerInput.equals("ai")) {
+			bestMove = ai.getBestMove(board, moveChecker);
 			return bestMove;
 		}
 		
@@ -43,7 +51,13 @@ public class Shell {
 		while(tokenizer.hasMoreTokens()) {
 			bestMove.add(coordMapper.getCoordOf(Integer.parseInt(tokenizer.nextToken())));
 		}
+		if(bestMove.size() == 0 || bestMove.size() == 1)
+			throw new Exception();
 		return bestMove;
+	}
+
+	public Object getWinnerMessage() {
+		return "none yet";
 	}
 
 }
