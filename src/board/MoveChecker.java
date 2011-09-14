@@ -6,6 +6,13 @@ import java.util.LinkedList;
 
 public class MoveChecker {
 
+	/**
+	 * 
+	 * @param grid
+	 * @param move
+	 * @param turn
+	 * @return
+	 */
 	public boolean isLegal(Character[][] grid, ArrayList<Integer[]> move, int turn) {
 		if(itIsBlacksTurn(turn))
 			return theMoveIsOneOfTheFoundLegalMoves(grid, move);
@@ -13,6 +20,11 @@ public class MoveChecker {
 			return theMoveIsOneOfTheFoundLegalMoves(flip(grid), flip(move));
 	}
 
+	/**
+	 * 
+	 * @param move
+	 * @return
+	 */
 	private ArrayList<Integer[]> flip(ArrayList<Integer[]> move) {
 		ArrayList<Integer[]> newMove = new ArrayList<Integer[]>();
 		for(int i = 0; i < move.size(); i++)
@@ -20,6 +32,11 @@ public class MoveChecker {
 		return newMove;
 	}
 
+	/**
+	 * 
+	 * @param grid
+	 * @return
+	 */
 	private Character[][] flip(Character[][] grid) {
 		Character[][] newGrid = new Character[grid.length][grid[0].length];
 		for (int i = 0; i < newGrid.length; i++) {
@@ -42,6 +59,12 @@ public class MoveChecker {
 		return newGrid;
 	}
 
+	/**
+	 * 
+	 * @param grid
+	 * @param move
+	 * @return
+	 */
 	private boolean theMoveIsOneOfTheFoundLegalMoves(Character[][] grid, ArrayList<Integer[]> move) {
 		Collection<ArrayList<Integer[]>> allPossibleMoves = new LinkedList<ArrayList<Integer[]>>();
 		Collection<Integer[]> blackPieces = getAllBlackPieces(grid);
@@ -70,6 +93,12 @@ public class MoveChecker {
 		return contains(allPossibleMoves, move);
 	}
 
+	/**
+	 * 
+	 * @param moves
+	 * @param move
+	 * @return
+	 */
 	private boolean contains(Collection<ArrayList<Integer[]>> moves, ArrayList<Integer[]> move) {
 		for (ArrayList<Integer[]> integers : moves) {
 			if(isSameAs(integers, move))
@@ -78,6 +107,12 @@ public class MoveChecker {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param integers
+	 * @param move
+	 * @return
+	 */
 	private boolean isSameAs(ArrayList<Integer[]> integers, ArrayList<Integer[]> move) {
 		try{
 			for(int i = 0; i < integers.size(); i++)
@@ -95,6 +130,12 @@ public class MoveChecker {
 		
 	}
 
+	/**
+	 * 
+	 * @param blackPiece
+	 * @param grid
+	 * @return
+	 */
 	private Collection<ArrayList<Integer[]>> normalMovesFor(Integer[] blackPiece, Character[][] grid) {
 		Collection<ArrayList<Integer[]>> moves = new LinkedList<ArrayList<Integer[]>>();
 		Collection<Integer[]> potentials = new LinkedList<Integer[]>();
@@ -120,6 +161,11 @@ public class MoveChecker {
 		return moves;
 	}
 
+	/**
+	 * 
+	 * @param grid
+	 * @return
+	 */
 	private Collection<Integer[]> getAllBlackPieces(Character[][] grid) {
 		LinkedList<Integer[]> blackPieces = new LinkedList<Integer[]>();
 		for(int i = 0; i < grid.length; i++)
@@ -131,10 +177,22 @@ public class MoveChecker {
 		return blackPieces;
 	}
 
+	/**
+	 * 
+	 * @param turn
+	 * @return
+	 */
 	private boolean itIsBlacksTurn(int turn) {
 		return (turn % 2) == 0;
 	}
 
+	/**
+	 * 
+	 * @param blackPiece
+	 * @param grid
+	 * @param jumpSoFar
+	 * @return
+	 */
 	private Collection<ArrayList<Integer[]>> jumpMovesFor(Integer[] blackPiece, Character[][] grid, ArrayList<Integer[]> jumpSoFar) {
 		Collection<ArrayList<Integer[]>> jumpMoves = new LinkedList<ArrayList<Integer[]>>();
 
@@ -190,6 +248,14 @@ public class MoveChecker {
 		return jumpMoves;
 	}
 
+	/**
+	 * 
+	 * @param grid
+	 * @param blackPiece
+	 * @param white
+	 * @param landing
+	 * @return
+	 */
 	private Character[][] newGridFrom(Character[][] grid, Integer[] blackPiece,
 			Integer[] white, Integer[] landing) {
 		
@@ -208,6 +274,12 @@ public class MoveChecker {
 		return newGrid;
 	}
 
+	/**
+	 * 
+	 * @param jumpSoFar
+	 * @param landing
+	 * @return
+	 */
 	private ArrayList<Integer[]> moveFrom(ArrayList<Integer[]> jumpSoFar,
 			Integer[] landing) {
 		ArrayList<Integer[]> newJump = (ArrayList<Integer[]>) jumpSoFar.clone();
@@ -215,6 +287,12 @@ public class MoveChecker {
 		return newJump;
 	}
 
+	/**
+	 * 
+	 * @param landing
+	 * @param grid
+	 * @return
+	 */
 	private boolean isLegalAndOpen(Integer[] landing, Character[][] grid) {
 		return (
 				isWithinBounds(landing) &&
@@ -222,6 +300,12 @@ public class MoveChecker {
 		);
 	}
 
+	/**
+	 * 
+	 * @param white
+	 * @param grid
+	 * @return
+	 */
 	private boolean isLegalAndWhite(Integer[] white, Character[][] grid) {
 		return (
 				isWithinBounds(white) &&
