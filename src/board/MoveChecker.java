@@ -66,6 +66,13 @@ public class MoveChecker {
 	 * @return
 	 */
 	private boolean theMoveIsOneOfTheFoundLegalMoves(Character[][] grid, ArrayList<Integer[]> move) {
+		Collection<ArrayList<Integer[]>> allPossibleMoves = getAllPossibleMovesForGivenGrid(grid);
+		
+		return contains(allPossibleMoves, move);
+	}
+
+	public Collection<ArrayList<Integer[]>> getAllPossibleMovesForGivenGrid(
+			Character[][] grid) {
 		Collection<ArrayList<Integer[]>> allPossibleMoves = new LinkedList<ArrayList<Integer[]>>();
 		Collection<Integer[]> blackPieces = getAllBlackPieces(grid);
 
@@ -79,18 +86,7 @@ public class MoveChecker {
 			for (Integer[] blackPiece : blackPieces) {
 				allPossibleMoves.addAll(normalMovesFor(blackPiece, grid));
 			}
-		
-
-		/*
-		 *  for each and everyBlackPiece()
-		 *		look for normal moves
-		 *		look for jumps, then double jumps, then tripple jumps, then ...
-		 *	add these to the collection...
-		 *
-		 *	check to see if move is one of the those in the collection
-		 * 
-		 */
-		return contains(allPossibleMoves, move);
+		return allPossibleMoves;
 	}
 
 	/**

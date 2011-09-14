@@ -116,9 +116,10 @@ public class Board {
 		String stringGrid = "";
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid.length; j++) {
+				stringGrid += "|";
 				stringGrid += grid[i][j];
 			}
-			stringGrid += "\n";
+			stringGrid += "|\n";
 		}
 		return stringGrid;
 	}

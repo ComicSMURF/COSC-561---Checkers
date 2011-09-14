@@ -22,7 +22,7 @@ public class ShellTest {
 	
 	@Before
 	public void setUp() {
-		shell = new Shell(mockedBoard, mockedAI, mockedMapper);
+		shell = new Shell(mockedBoard, mockedAI, mockedMapper, null);
 	}
 	
 	@Test
@@ -40,11 +40,11 @@ public class ShellTest {
 	public void ifStringSentIsAIThenMakesCallToAIWIthCurrentBoardAndMovesCurrentBoard() {
 		ArrayList<Integer[]> move = new ArrayList<Integer[]>();
 		move.add(new Integer[] {2, 3});
-		when(mockedAI.getBestMove(mockedBoard)).thenReturn(move);
+		when(mockedAI.getBestMove(mockedBoard, null)).thenReturn(move);
 		
 		shell.tryMove("ai");
 
-		verify(mockedAI).getBestMove(mockedBoard);
+		verify(mockedAI).getBestMove(mockedBoard, null);
 		verify(mockedBoard).move(move);
 	}
 	
