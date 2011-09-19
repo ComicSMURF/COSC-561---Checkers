@@ -7,11 +7,12 @@ import java.util.LinkedList;
 public class MoveChecker {
 
 	/**
+	 * Determines if a move is a legal one
 	 * 
-	 * @param grid
-	 * @param move
-	 * @param turn
-	 * @return
+	 * @param grid the current grid of the board
+	 * @param move the move that is desired
+	 * @param turn whether it is black or white's turn
+	 * @return returns the boolean of if that is a legal move
 	 */
 	public boolean isLegal(Character[][] grid, ArrayList<Integer[]> move, int turn) {
 		if(itIsBlacksTurn(turn))
@@ -21,8 +22,10 @@ public class MoveChecker {
 	}
 
 	/**
+	 * Inverts the board for ease of making
+	 * the moves of white and black
 	 * 
-	 * @param move
+	 * @param move current move selection
 	 * @return
 	 */
 	private ArrayList<Integer[]> flip(ArrayList<Integer[]> move) {
@@ -33,9 +36,10 @@ public class MoveChecker {
 	}
 
 	/**
+	 * Populates the grid with the appropriate pieces
 	 * 
-	 * @param grid
-	 * @return
+	 * @param grid the current board grid
+	 * @return the flipped board
 	 */
 	private Character[][] flip(Character[][] grid) {
 		Character[][] newGrid = new Character[grid.length][grid[0].length];
@@ -60,10 +64,12 @@ public class MoveChecker {
 	}
 
 	/**
+	 * Helps in the determining if the move is one of the listed 
+	 * legal moves that were found
 	 * 
-	 * @param grid
-	 * @param move
-	 * @return
+	 * @param grid current layout of checker board
+	 * @param move move that is desired
+	 * @return the boolean of if it is contained within the possible moves
 	 */
 	private boolean theMoveIsOneOfTheFoundLegalMoves(Character[][] grid, ArrayList<Integer[]> move) {
 		Collection<ArrayList<Integer[]>> allPossibleMoves = getAllPossibleMovesForGivenGrid(grid);
@@ -71,6 +77,13 @@ public class MoveChecker {
 		return contains(allPossibleMoves, move);
 	}
 
+	/**
+	 * Takes the given state of the checker board and returns all 
+	 * possible moves that are available
+	 * 
+	 * @param grid the current state of the board
+	 * @return list of moves that are available 
+	 */
 	public Collection<ArrayList<Integer[]>> getAllPossibleMovesForGivenGrid(
 			Character[][] grid) {
 		Collection<ArrayList<Integer[]>> allPossibleMoves = new LinkedList<ArrayList<Integer[]>>();
@@ -90,10 +103,12 @@ public class MoveChecker {
 	}
 
 	/**
+	 * Helper function for determining if the move that is made is 
+	 * within the list of all possible moves
 	 * 
-	 * @param moves
-	 * @param move
-	 * @return
+	 * @param moves list of all possible moves
+	 * @param move current move 
+	 * @return boolean of move requested
 	 */
 	private boolean contains(Collection<ArrayList<Integer[]>> moves, ArrayList<Integer[]> move) {
 		for (ArrayList<Integer[]> integers : moves) {
@@ -104,9 +119,11 @@ public class MoveChecker {
 	}
 
 	/**
+	 * Test to see if the move that was made is the same as one of the moves
+	 * that are valid.
 	 * 
-	 * @param integers
-	 * @param move
+	 * @param integers moves that are allowed
+	 * @param move current move that was selected
 	 * @return
 	 */
 	private boolean isSameAs(ArrayList<Integer[]> integers, ArrayList<Integer[]> move) {
@@ -127,9 +144,11 @@ public class MoveChecker {
 	}
 
 	/**
+	 * Returns all possible moves for a specific piece on the
+	 * current board
 	 * 
-	 * @param blackPiece
-	 * @param grid
+	 * @param blackPiece current position of a piece
+	 * @param grid current board setup
 	 * @return
 	 */
 	private Collection<ArrayList<Integer[]>> normalMovesFor(Integer[] blackPiece, Character[][] grid) {
