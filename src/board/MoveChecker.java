@@ -177,9 +177,10 @@ public class MoveChecker {
 	}
 
 	/**
+	 * Retrieves the list of all black pieces and returns their positions.
 	 * 
-	 * @param grid
-	 * @return
+	 * @param grid current list of black pieces
+	 * @return the list of all black pieces
 	 */
 	private Collection<Integer[]> getAllBlackPieces(Character[][] grid) {
 		LinkedList<Integer[]> blackPieces = new LinkedList<Integer[]>();
@@ -193,15 +194,17 @@ public class MoveChecker {
 	}
 
 	/**
+	 * Determines when black's turn is
 	 * 
-	 * @param turn
-	 * @return
+	 * @param turn the current number of turns
+	 * @return boolean value if it is black's turn
 	 */
 	private boolean itIsBlacksTurn(int turn) {
 		return (turn % 2) == 0;
 	}
 
 	/**
+	 * Finds the jumpable pieces for the specific piece
 	 * 
 	 * @param blackPiece
 	 * @param grid
