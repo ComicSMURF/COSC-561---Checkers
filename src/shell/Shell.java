@@ -43,6 +43,14 @@ public class Shell {
 		
 		if(playerInput.equals("ai")) {
 			bestMove = ai.getBestMove(board, moveChecker);
+			for(int i = 0; i < bestMove.size(); i++) {
+				Integer[] move = bestMove.get(i);
+				for(int j = 0; j < move.length; j++) {
+					System.out.print(move[j] + " ");
+				}
+				System.out.println();
+			}
+//			System.out.println(bestMove);
 			return bestMove;
 		}
 		

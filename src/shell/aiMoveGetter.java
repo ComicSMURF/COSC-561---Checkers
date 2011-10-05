@@ -10,10 +10,10 @@ public class aiMoveGetter {
 
 	public ArrayList<Integer[]> getBestMove(Board board, MoveChecker moveChecker) {
 		ArrayList<ArrayList<Integer[]>> allPossible = new ArrayList<ArrayList<Integer[]>>();
-		
+				
 		if(itIsBlacksTurn(board)) {
 			allPossible.addAll(moveChecker.getAllPossibleMovesForGivenGrid(board.grid()));
-			return allPossible.get((int) (Math.random() % allPossible.size()));			
+			return allPossible.get((int) (Math.random() % allPossible.size()));	
 		}
 		else {
 			allPossible.addAll(moveChecker.getAllPossibleMovesForGivenGrid(moveChecker.flip(board.grid())));
