@@ -6,6 +6,14 @@ import java.util.LinkedList;
 
 public class MoveChecker {
 
+	/**
+	 * Determines if a move is a legal one
+	 * 
+	 * @param grid the current grid of the board
+	 * @param move the move that is desired
+	 * @param turn whether it is black or white's turn
+	 * @return returns the boolean of if that is a legal move
+	 */
 	public boolean isLegal(Character[][] grid, ArrayList<Integer[]> move, int turn) {
 		if(itIsBlacksTurn(turn))
 			return theMoveIsOneOfTheFoundLegalMoves(grid, move);
@@ -13,14 +21,27 @@ public class MoveChecker {
 			return theMoveIsOneOfTheFoundLegalMoves(flip(grid), flip(move));
 	}
 
-	public ArrayList<Integer[]> flip(ArrayList<Integer[]> move) {
+	/**
+	 * Inverts the board for ease of making
+	 * the moves of white and black
+	 * 
+	 * @param move current move selection
+	 * @return
+	 */
+	private ArrayList<Integer[]> flip(ArrayList<Integer[]> move) {
 		ArrayList<Integer[]> newMove = new ArrayList<Integer[]>();
 		for(int i = 0; i < move.size(); i++)
 			newMove.add(new Integer[] {7-move.get(i)[0], 7-move.get(i)[1]});
 		return newMove;
 	}
 
-	public Character[][] flip(Character[][] grid) {
+	/**
+	 * Populates the grid with the appropriate pieces
+	 * 
+	 * @param grid the current board grid
+	 * @return the flipped board
+	 */
+	private Character[][] flip(Character[][] grid) {
 		Character[][] newGrid = new Character[grid.length][grid[0].length];
 		for (int i = 0; i < newGrid.length; i++) {
 			for (int j = 0; j < newGrid[0].length; j++) {
@@ -42,12 +63,27 @@ public class MoveChecker {
 		return newGrid;
 	}
 
+	/**
+	 * Helps in the determining if the move is one of the listed 
+	 * legal moves that were found
+	 * 
+	 * @param grid current layout of checker board
+	 * @param move move that is desired
+	 * @return the boolean of if it is contained within the possible moves
+	 */
 	private boolean theMoveIsOneOfTheFoundLegalMoves(Character[][] grid, ArrayList<Integer[]> move) {
 		Collection<ArrayList<Integer[]>> allPossibleMoves = getAllPossibleMovesForGivenGrid(grid);
 		
 		return contains(allPossibleMoves, move);
 	}
 
+	/**
+	 * Takes the given state of the checker board and returns all 
+	 * possible moves that are available
+	 * 
+	 * @param grid the current state of the board
+	 * @return list of moves that are available 
+	 */
 	public Collection<ArrayList<Integer[]>> getAllPossibleMovesForGivenGrid(
 			Character[][] grid) {
 		Collection<ArrayList<Integer[]>> allPossibleMoves = new LinkedList<ArrayList<Integer[]>>();
@@ -66,6 +102,14 @@ public class MoveChecker {
 		return allPossibleMoves;
 	}
 
+	/**
+	 * Helper function for determining if the move that is made is 
+	 * within the list of all possible moves
+	 * 
+	 * @param moves list of all possible moves
+	 * @param move current move 
+	 * @return boolean of move requested
+	 */
 	private boolean contains(Collection<ArrayList<Integer[]>> moves, ArrayList<Integer[]> move) {
 		for (ArrayList<Integer[]> integers : moves) {
 			if(isSameAs(integers, move))
@@ -74,6 +118,14 @@ public class MoveChecker {
 		return false;
 	}
 
+	/**
+	 * Test to see if the move that was made is the same as one of the moves
+	 * that are valid.
+	 * 
+	 * @param integers moves that are allowed
+	 * @param move current move that was selected
+	 * @return
+	 */
 	private boolean isSameAs(ArrayList<Integer[]> integers, ArrayList<Integer[]> move) {
 		try{
 			for(int i = 0; i < integers.size(); i++)
@@ -91,6 +143,14 @@ public class MoveChecker {
 		
 	}
 
+	/**
+	 * Returns all possible moves for a specific piece on the
+	 * current board
+	 * 
+	 * @param blackPiece current position of a piece
+	 * @param grid current board setup
+	 * @return
+	 */
 	private Collection<ArrayList<Integer[]>> normalMovesFor(Integer[] blackPiece, Character[][] grid) {
 		Collection<ArrayList<Integer[]>> moves = new LinkedList<ArrayList<Integer[]>>();
 		Collection<Integer[]> potentials = new LinkedList<Integer[]>();
@@ -116,6 +176,12 @@ public class MoveChecker {
 		return moves;
 	}
 
+	/**
+	 * Retrieves the list of all black pieces and returns their positions.
+	 * 
+	 * @param grid current list of black pieces
+	 * @return the list of all black pieces
+	 */
 	private Collection<Integer[]> getAllBlackPieces(Character[][] grid) {
 		LinkedList<Integer[]> blackPieces = new LinkedList<Integer[]>();
 		for(int i = 0; i < grid.length; i++)
@@ -127,10 +193,24 @@ public class MoveChecker {
 		return blackPieces;
 	}
 
+	/**
+	 * Determines when black's turn is
+	 * 
+	 * @param turn the current number of turns
+	 * @return boolean value if it is black's turn
+	 */
 	private boolean itIsBlacksTurn(int turn) {
 		return (turn % 2) == 0;
 	}
 
+	/**
+	 * Finds the jumpable pieces for the specific piece
+	 * 
+	 * @param blackPiece
+	 * @param grid
+	 * @param jumpSoFar
+	 * @return
+	 */
 	private Collection<ArrayList<Integer[]>> jumpMovesFor(Integer[] blackPiece, Character[][] grid, ArrayList<Integer[]> jumpSoFar) {
 		Collection<ArrayList<Integer[]>> jumpMoves = new LinkedList<ArrayList<Integer[]>>();
 
@@ -186,6 +266,14 @@ public class MoveChecker {
 		return jumpMoves;
 	}
 
+	/**
+	 * 
+	 * @param grid
+	 * @param blackPiece
+	 * @param white
+	 * @param landing
+	 * @return
+	 */
 	private Character[][] newGridFrom(Character[][] grid, Integer[] blackPiece,
 			Integer[] white, Integer[] landing) {
 		
@@ -204,6 +292,12 @@ public class MoveChecker {
 		return newGrid;
 	}
 
+	/**
+	 * 
+	 * @param jumpSoFar
+	 * @param landing
+	 * @return
+	 */
 	private ArrayList<Integer[]> moveFrom(ArrayList<Integer[]> jumpSoFar,
 			Integer[] landing) {
 		ArrayList<Integer[]> newJump = (ArrayList<Integer[]>) jumpSoFar.clone();
@@ -211,6 +305,12 @@ public class MoveChecker {
 		return newJump;
 	}
 
+	/**
+	 * 
+	 * @param landing
+	 * @param grid
+	 * @return
+	 */
 	private boolean isLegalAndOpen(Integer[] landing, Character[][] grid) {
 		return (
 				isWithinBounds(landing) &&
@@ -218,6 +318,12 @@ public class MoveChecker {
 		);
 	}
 
+	/**
+	 * 
+	 * @param white
+	 * @param grid
+	 * @return
+	 */
 	private boolean isLegalAndWhite(Integer[] white, Character[][] grid) {
 		return (
 				isWithinBounds(white) &&

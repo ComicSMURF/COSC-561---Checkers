@@ -5,5 +5,16 @@ package ai;
  *
  */
 public class AIStruct {
+	
+	
+	public AIStruct(){
+		
+	}
+	
+	public AIStruct(AINode head){
+		
+	}
 
+	
+	
 }
