@@ -28,7 +28,7 @@ public class MoveChecker {
 	 * @param move current move selection
 	 * @return
 	 */
-	private ArrayList<Integer[]> flip(ArrayList<Integer[]> move) {
+	public ArrayList<Integer[]> flip(ArrayList<Integer[]> move) {
 		ArrayList<Integer[]> newMove = new ArrayList<Integer[]>();
 		for(int i = 0; i < move.size(); i++)
 			newMove.add(new Integer[] {7-move.get(i)[0], 7-move.get(i)[1]});
@@ -41,7 +41,7 @@ public class MoveChecker {
 	 * @param grid the current board grid
 	 * @return the flipped board
 	 */
-	private Character[][] flip(Character[][] grid) {
+	public Character[][] flip(Character[][] grid) {
 		Character[][] newGrid = new Character[grid.length][grid[0].length];
 		for (int i = 0; i < newGrid.length; i++) {
 			for (int j = 0; j < newGrid[0].length; j++) {
@@ -204,11 +204,11 @@ public class MoveChecker {
 	}
 
 	/**
-	 * Finds the jumpable pieces for the specific piece
+	 * Finds the jumpable pieces for the specific piece that is passed
 	 * 
-	 * @param blackPiece
+	 * @param blackPiece current position of black piece
 	 * @param grid
-	 * @param jumpSoFar
+	 * @param jumpSoFar 
 	 * @return
 	 */
 	private Collection<ArrayList<Integer[]>> jumpMovesFor(Integer[] blackPiece, Character[][] grid, ArrayList<Integer[]> jumpSoFar) {

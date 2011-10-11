@@ -23,6 +23,21 @@ public class Board {
 			 			  {'w',' ','w',' ','w',' ','w',' '}};
 
 	/**
+	 * Copy Constructor for the deep cloning of the 
+	 * board in the evaluator class
+	 * 
+	 * @param copyBoard Board to be copied
+	 */
+	public Board(Board copyBoard){
+		this.movesSoFar = copyBoard.movesSoFar;
+		this.grid = copyBoard.grid;
+	}
+	
+	public Board() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
 	 * Getter for the checker board
 	 * 
 	 * @return the current state of the board
