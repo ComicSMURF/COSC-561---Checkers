@@ -7,7 +7,11 @@ import board.Board;
 import board.MoveChecker;
 
 public class Evaluator {
-
+	
+	public int evaluate(Struct thinger) {
+		return (int) (Math.random() * 1000.0);
+	}
+/*
 	public int bestMoveFor(Board passedBoard, int depth){
 		MoveChecker moving = new MoveChecker();
 		Collection<Struct> boardsParent = new ArrayList<Struct>();
@@ -18,11 +22,9 @@ public class Evaluator {
 		for(Struct b : boardsParent){
 			for( ArrayList<Integer[]> k : moving.getAllPossibleMovesForGivenGrid(b.currBoard.grid())){
 				System.out.println(k);
-				for(Integer[] r : k){
-					System.out.println(r);
-					Board copied = new Board(b.currBoard);
-					copied.move(k);
-					boardsChildren.add(new Struct(copied, r, b));
+				Board copied = new Board(b.currBoard);
+				copied.move(k);
+				boardsChildren.add(new Struct(copied, k, b));
 				}
 			}
 			boardsParent = boardsChildren;
@@ -38,7 +40,7 @@ public class Evaluator {
 			return min(boardsParent).getVal();
 		
 	}
-
+*/
 	private Struct min(Collection<Struct> boardsParent) {
 		Struct temp = null;
 		for(Struct board : boardsParent)
@@ -59,11 +61,11 @@ public class Evaluator {
 class Struct{
 
 	Board currBoard;
-	Integer[] move;
+	ArrayList<Integer[]> move;
 	Struct prev;
 	private int value;
 	
-	public Struct(Board passedBoard, Integer[] move, Struct parent) {
+	public Struct(Board passedBoard, ArrayList<Integer[]> move, Struct parent) {
 		this.currBoard = passedBoard;
 		this.move= move;
 		this.prev = parent;

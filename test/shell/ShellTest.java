@@ -40,11 +40,11 @@ public class ShellTest {
 	public void ifStringSentIsAIThenMakesCallToAIWIthCurrentBoardAndMovesCurrentBoard() {
 		ArrayList<Integer[]> move = new ArrayList<Integer[]>();
 		move.add(new Integer[] {2, 3});
-		when(mockedAI.getBestMove(mockedBoard, null)).thenReturn(move);
+		when(mockedAI.getRandomLegalMove(mockedBoard, null)).thenReturn(move);
 		
 		shell.tryMove("ai");
 
-		verify(mockedAI).getBestMove(mockedBoard, null);
+		verify(mockedAI).getRandomLegalMove(mockedBoard, null);
 		verify(mockedBoard).move(move);
 	}
 	

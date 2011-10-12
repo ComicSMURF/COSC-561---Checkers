@@ -42,7 +42,7 @@ public class Shell {
 		ArrayList<Integer[]> bestMove;
 		
 		if(playerInput.equals("ai")) {
-			bestMove = ai.getBestMove(board, moveChecker);
+			bestMove = ai.getRandomLegalMove(board, moveChecker);
 			for(int i = 0; i < bestMove.size(); i++) {
 				Integer[] move = bestMove.get(i);
 				for(int j = 0; j < move.length; j++) {

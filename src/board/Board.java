@@ -33,6 +33,13 @@ public class Board {
 		this.grid = copyBoard.grid;
 	}
 	
+	public Board cloneDeep() {
+		Board board = new Board();
+		board.grid = this.grid.clone();
+		board.movesSoFar = this.movesSoFar;
+		return board;
+	}
+	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
