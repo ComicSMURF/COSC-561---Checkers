@@ -13,7 +13,7 @@ public class Board {
 	/**
 	 * keeps track of the current state of the board
 	 */
-	private Character[][] grid = {{' ','b',' ','b',' ','b',' ','b'},
+	public Character[][] grid = {{' ','b',' ','b',' ','b',' ','b'},
 			 			  {'b',' ','b',' ','b',' ','b',' '},
 			 			  {' ','b',' ','b',' ','b',' ','b'},
 			 			  {' ',' ',' ',' ',' ',' ',' ',' '},
@@ -26,11 +26,21 @@ public class Board {
 	 * Copy Constructor for the deep cloning of the 
 	 * board in the evaluator class
 	 * 
-	 * @param copyBoard Board to be copied
-	 */
-	public Board(Board copyBoard){
-		this.movesSoFar = copyBoard.movesSoFar;
-		this.grid = copyBoard.grid;
+	 */	
+	public Board cloneDeep() {
+		Board board = new Board();
+		board.grid = new Character[8][8];
+			
+		
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				board.grid[i][j] = this.grid[i][j];
+			}
+		}
+		
+		
+		board.movesSoFar = this.movesSoFar;
+		return board;
 	}
 	
 	public Board() {

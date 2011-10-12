@@ -26,15 +26,17 @@ public class Shell {
 			ArrayList<Integer[]> bestMove = moveFromString(playerInput);
 			
 			if(moveChecker.isLegal(board.grid(), bestMove, board.movesSoFar()))
+			{
 				board.move(bestMove);
-			else
-				throw new Exception();
-			
+			}
+			else{
+				throw new Exception(" asdf"+  bestMove.toString() + "\n" + board.gridAsString());
+			}			
 			return board.gridAsString();
 			
 		}
 		catch(Exception e) {
-			return "not a valid move.. try again!";
+			return e.getMessage() + " is not a valid move.. try again!";
 		}
 	}
 
@@ -42,7 +44,7 @@ public class Shell {
 		ArrayList<Integer[]> bestMove;
 		
 		if(playerInput.equals("ai")) {
-			bestMove = ai.getBestMove(board, moveChecker);
+			bestMove = ai.bestMoveFor(board, 6);//getRandomLegalMove(board, moveChecker);
 			for(int i = 0; i < bestMove.size(); i++) {
 				Integer[] move = bestMove.get(i);
 				
@@ -62,7 +64,7 @@ public class Shell {
 			bestMove.add(coordMapper.getCoordOf(Integer.parseInt(tokenizer.nextToken())));
 		}
 		if(bestMove.size() == 0 || bestMove.size() == 1)
-			throw new Exception();
+			throw new Exception("something " + bestMove.toString());
 		return bestMove;
 	}
 
@@ -70,4 +72,5 @@ public class Shell {
 		return "none yet";
 	}
 
+	
 }
