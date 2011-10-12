@@ -8,7 +8,9 @@ import board.MoveChecker;
 
 public class Evaluator {
 
-	public int bestMoveFor(Board passedBoard, int depth){
+	
+	
+	public Integer[] bestMoveFor(Board passedBoard, int depth){
 		MoveChecker moving = new MoveChecker();
 		Collection<Struct> boardsParent = new ArrayList<Struct>();
 		Collection<Struct> boardsChildren = new ArrayList<Struct>();
@@ -33,9 +35,11 @@ public class Evaluator {
 			//board.setVal(evaluate(board.currBoard));
 		}
 		if(depth%2==0)
-			return max(boardsParent).getVal();
+			max(boardsParent);
 		else
-			return min(boardsParent).getVal();
+			min(boardsParent);
+		
+		return new Integer[] {2, 4};
 		
 	}
 
