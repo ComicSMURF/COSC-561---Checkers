@@ -23,9 +23,9 @@ public class aiMoveGetter {
 			}
 			boardsParent = boardsChildren;
 			boardsChildren = new ArrayList<Struct>();
-			System.out.println("p"+boardsParent.toString());
+			//System.out.println("p"+boardsParent.toString());
 		}
-		System.out.println("did i make it here?");
+		//System.out.println("did i make it here?");
 
 		if((depth + passedBoard.movesSoFar())%2 == 0)
 			return moveAsIfTryingToGetMax(boardsParent);

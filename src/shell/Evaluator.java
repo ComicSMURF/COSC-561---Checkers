@@ -7,8 +7,9 @@ public class Evaluator {
 
 	
 	public int evaluate(Struct thinger) {
+		//thinger.currBoard.grid;
 		return 5;
-//		return (int) (Math.random() * 1000.0);
+		//return (int) (Math.random() * 1000.0);
 	}
 
 }
