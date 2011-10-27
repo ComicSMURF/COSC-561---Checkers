@@ -98,7 +98,7 @@ public class Shell {
 		
 	}
 	/********************************
-	 * Returns the number of turns, the 
+	 * Returns the stats
 	 * @return
 	 */
 	private String statsFromGame() {

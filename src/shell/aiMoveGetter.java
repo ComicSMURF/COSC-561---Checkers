@@ -21,8 +21,10 @@ public class aiMoveGetter {
 				boardsChildren.addAll(everyPossibleMoveIn(aPossibleBoard));
 //				System.out.println("c"+boardsChildren.toString());
 			}
-			boardsParent = boardsChildren;
-			boardsChildren = new ArrayList<Struct>();
+			if(!allChildrenAreNull(boardsChildren)){
+				boardsParent = boardsChildren;
+				boardsChildren = new ArrayList<Struct>();
+			}
 			//System.out.println("p"+boardsParent.toString());
 		}
 		//System.out.println("did i make it here?");
@@ -32,6 +34,14 @@ public class aiMoveGetter {
 		else
 			return moveAsIfTryingToGetMin(boardsParent);
 		
+	}
+
+	private boolean allChildrenAreNull(Collection<Struct> boardsChildren) {
+		for(Struct s : boardsChildren){
+			if(!s.equals(null))
+				return false;
+		}
+		return true;
 	}
 
 	private Collection<Struct> everyPossibleMoveIn(Struct aPossibleBoard) {
