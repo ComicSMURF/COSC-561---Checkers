@@ -19,16 +19,14 @@ public class aiMoveGetter {
 		for(int i = 0; i < depth; i++) {
 			for(Struct aPossibleBoard : boardsParent){				
 				boardsChildren.addAll(everyPossibleMoveIn(aPossibleBoard));
-//				System.out.println("c"+boardsChildren.toString());
 			}
 			if(!allChildrenAreNull(boardsChildren)){
 				boardsParent = boardsChildren;
 				boardsChildren = new ArrayList<Struct>();
 			}
-			//System.out.println("p"+boardsParent.toString());
 		}
-		//System.out.println("did i make it here?");
-
+		for(Struct s : boardsParent)
+			boardsParent.remove(null);
 		if((depth + passedBoard.movesSoFar())%2 == 0)
 			return moveAsIfTryingToGetMax(boardsParent);
 		else
@@ -110,7 +108,8 @@ public class aiMoveGetter {
 		Struct currentBestSituation = null;
 		
 		for (Struct struct : boardsParent) {
-			if(currentBestSituation == null || evaluator.evaluate(struct) > evaluator.evaluate(currentBestSituation))
+			//System.out.println(evaluator.evaluate(struct) > evaluator.evaluate(currentBestSituation));
+			if(currentBestSituation == null || evaluator.evaluate(struct) >= evaluator.evaluate(currentBestSituation))
 				currentBestSituation = struct;			
 		}
 		return getFirstMoveToward(currentBestSituation);
