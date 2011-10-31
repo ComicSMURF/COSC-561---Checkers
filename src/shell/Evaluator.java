@@ -24,14 +24,20 @@ public class Evaluator {
 		if(thinger != null){
 			for(int i = 0; i < thinger.currBoard.grid.length; i++){
 				for(int j = 0; j < thinger.currBoard.grid[0].length; j++){
-					if(thinger.currBoard.grid[i][j] == 'B')
+					if(thinger.currBoard.grid[i][j] == 'B'){
 						valBlack += 10;
-					else if(thinger.currBoard.grid[i][j] == 'b')
+					}
+					else if(thinger.currBoard.grid[i][j] == 'b'){
 						valBlack += 5;
-					else if(thinger.currBoard.grid[i][j] == 'W')
+						valBlack += (i*2);
+					}
+					else if(thinger.currBoard.grid[i][j] == 'W'){
 						valWhite += 10;
-					else if(thinger.currBoard.grid[i][j] == 'w')
+					}
+					else if(thinger.currBoard.grid[i][j] == 'w'){
 						valWhite += 5;
+						valBlack += (i*2);
+					}
 					else{ }
 				}
 			}
