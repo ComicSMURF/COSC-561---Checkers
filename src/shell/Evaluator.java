@@ -25,26 +25,26 @@ public class Evaluator {
 			for(int i = 0; i < thinger.currBoard.grid.length; i++){
 				for(int j = 0; j < thinger.currBoard.grid[0].length; j++){
 					if(thinger.currBoard.grid[i][j] == 'B'){
-						valBlack += 10;
+						valBlack += 20;
 					}
 					else if(thinger.currBoard.grid[i][j] == 'b'){
 						valBlack += 5;
-						valBlack += (i*2);
+				//		valBlack += (i*2);
 					}
 					else if(thinger.currBoard.grid[i][j] == 'W'){
-						valWhite += 10;
+						valWhite += 20;
 					}
 					else if(thinger.currBoard.grid[i][j] == 'w'){
 						valWhite += 5;
-						valBlack += (i*2);
+					//	valBlack += (i*2);
 					}
 					else{ }
 				}
 			}
 		}
-		if((thinger.currBoard.movesSoFar()%2) == 0)
+//		if((thinger.currBoard.movesSoFar()%2) == 0)
 			return (valBlack - valWhite);
-		return (valWhite - valBlack);
+//		return (valWhite - valBlack);
 	}
 
 }

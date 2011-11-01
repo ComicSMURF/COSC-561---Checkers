@@ -122,6 +122,7 @@ public class aiMoveGetter {
 		
 		for (Struct struct : boardsParent) {
 			if(currentBestSituation == null || evaluator.evaluate(struct) < evaluator.evaluate(currentBestSituation))
+//				if(currentBestSituation == null || evaluator.evaluate(struct) >= evaluator.evaluate(currentBestSituation))
 				currentBestSituation = struct;			
 		}
 		return getFirstMoveToward(currentBestSituation);
