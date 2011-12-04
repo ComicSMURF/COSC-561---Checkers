@@ -1,6 +1,7 @@
 package shell;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 
 import board.Board;
@@ -20,31 +21,106 @@ public class Evaluator {
 	 * @return
 	 */
 	public int evaluate(Struct thinger) {
-		int valBlack = 0, valWhite = 0;
+		int valBlackP = 0, valBlackK = 0, valWhiteP = 0, valWhiteK = 0;
 		if(thinger != null){
 			for(int i = 0; i < thinger.currBoard.grid.length; i++){
 				for(int j = 0; j < thinger.currBoard.grid[0].length; j++){
 					if(thinger.currBoard.grid[i][j] == 'B'){
-						valBlack += 20;
+						valBlackK += 2;
+						if(i==0 || j == 7 || i == 7 || j == 0){
+							valBlackK += 10;
+						}else{
+							if((thinger.currBoard.grid[i+1][j+1] == 'w' && thinger.currBoard.grid[i-1][j-1] == ' ' )|| 
+								(thinger.currBoard.grid[i+1][j+1] == 'W' && thinger.currBoard.grid[i-1][j-1] == ' ') || 
+									(thinger.currBoard.grid[i+1][j-1] == 'w' && thinger.currBoard.grid[i-1][j+1] == ' ') ||
+									(thinger.currBoard.grid[i+1][j-1] == 'W' && thinger.currBoard.grid[i-1][j+1] == ' ') || 
+									(thinger.currBoard.grid[i-1][j+1] == 'W' && thinger.currBoard.grid[i+1][j-1] == ' ') || 
+									(thinger.currBoard.grid[i-1][j-1] == 'W' && thinger.currBoard.grid[i+1][j+1] == ' ')){
+								valBlackK -=10;
+							}
+							else{
+								valBlackK +=10;
+							}
+						}
 					}
 					else if(thinger.currBoard.grid[i][j] == 'b'){
-						valBlack += 5;
-				//		valBlack += (i*2);
+						valBlackP += 1;
+						if(i==0 || j == 7 || i == 7 || j == 0){
+							valBlackP += 5;
+						}else{
+							if((thinger.currBoard.grid[i+1][j+1] == 'w' && thinger.currBoard.grid[i-1][j-1] == ' ' )|| 
+								(thinger.currBoard.grid[i+1][j+1] == 'W' && thinger.currBoard.grid[i-1][j-1] == ' ') || 
+									(thinger.currBoard.grid[i+1][j-1] == 'w' && thinger.currBoard.grid[i-1][j+1] == ' ') ||
+									(thinger.currBoard.grid[i+1][j-1] == 'W' && thinger.currBoard.grid[i-1][j+1] == ' ') || 
+									(thinger.currBoard.grid[i-1][j+1] == 'W' && thinger.currBoard.grid[i+1][j-1] == ' ') || 
+									(thinger.currBoard.grid[i-1][j-1] == 'W' && thinger.currBoard.grid[i+1][j+1] == ' ')){
+								valBlackP -= 5;
+							}
+							else{
+								valBlackP +=5;
+							}
+						}
 					}
 					else if(thinger.currBoard.grid[i][j] == 'W'){
-						valWhite += 20;
+						valWhiteK += 2;
+						if(i==0 || j == 7 || i == 7 || j == 0){
+							valWhiteK += 10;
+						}else{
+							if((thinger.currBoard.grid[i-1][j-1] == 'w' && thinger.currBoard.grid[i+1][j+1] == ' ' )|| 
+								(thinger.currBoard.grid[i-1][j-1] == 'W' && thinger.currBoard.grid[i+1][j+1] == ' ') || 
+									(thinger.currBoard.grid[i-1][j+1] == 'w' && thinger.currBoard.grid[i+1][j-1] == ' ') ||
+									(thinger.currBoard.grid[i-1][j+1] == 'W' && thinger.currBoard.grid[i+1][j-1] == ' ') || 
+									(thinger.currBoard.grid[i+1][j-1] == 'W' && thinger.currBoard.grid[i-1][j+1] == ' ') || 
+									(thinger.currBoard.grid[i+1][j+1] == 'W' && thinger.currBoard.grid[i-1][j-1] == ' ')){
+								valWhiteK -= 10;
+							}
+							else{
+								valWhiteK += 10;
+							}
+						}
 					}
 					else if(thinger.currBoard.grid[i][j] == 'w'){
-						valWhite += 5;
-					//	valBlack += (i*2);
+						valWhiteP += 1;
+						if(i==0 || j == 7 || i == 7 || j == 0){
+							valWhiteP += 5;
+						}else{
+							if((thinger.currBoard.grid[i-1][j-1] == 'w' && thinger.currBoard.grid[i+1][j+1] == ' ' )|| 
+								(thinger.currBoard.grid[i-1][j-1] == 'W' && thinger.currBoard.grid[i+1][j+1] == ' ') || 
+									(thinger.currBoard.grid[i-1][j+1] == 'w' && thinger.currBoard.grid[i+1][j-1] == ' ') ||
+									(thinger.currBoard.grid[i-1][j+1] == 'W' && thinger.currBoard.grid[i+1][j-1] == ' ') || 
+									(thinger.currBoard.grid[i+1][j-1] == 'W' && thinger.currBoard.grid[i-1][j+1] == ' ') || 
+									(thinger.currBoard.grid[i+1][j+1] == 'W' && thinger.currBoard.grid[i-1][j-1] == ' ')){
+								valWhiteP -= 5;
+							}
+							else{
+								valWhiteP +=5;
+							}
+						}
 					}
 					else{ }
 				}
 			}
-		}
-//		if((thinger.currBoard.movesSoFar()%2) == 0)
-			return (valBlack - valWhite);
-//		return (valWhite - valBlack);
+		
+
+		
+			int value = 0, valBlack = 0, valWhite = 0;
+			//if(valBlackP+(valBlackK)/2 > 5 || valWhiteP+(valWhiteK)/2 > 5){
+				valBlack = (valBlackP+3*valBlackK)/2;
+				valWhite = (valWhiteP+3*valWhiteK)/2;
+        
+				value += (valBlack-valWhite)*Math.pow(27, 2);
+		//	}else{
+				//Random r = new Random();
+				//value = r.nextInt(100);
+			//}
+			return value;
+        }
+        return 0;
+	}
+
+	private boolean isJumpable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
